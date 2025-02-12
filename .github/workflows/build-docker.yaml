@@ -12,4 +12,5 @@ jobs:
       - name: build image
         run: docker build ./api -t tansib007/devops-qr-code-front-end:latest
       - name: push image to Docker Hub
-        run: docker push tansib007/devops-qr-code-front-end:latest
+        run: | 
+          docker push -u tansib007 -p {{$secrets.DOCKER_HUB_TOKEN}} tansib007/devops-qr-code-front-end:latest
