@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v4
       - name: build images
         run: |
-          docker build ./api -t tansib007/docker push tansib007/docker-fastapi:latest
+          docker build ./api -t tansib007/docker-fastapi:latest
           docker build ./front-end-nextjs -t tansib007/devops-qr-code-front-end:latest
       - name: Login to DockerHub
         run:  echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u tansib007 --password-stdin
