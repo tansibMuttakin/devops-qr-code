@@ -9,9 +9,13 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4
-      - name: build image
-        run: docker build ./api -t tansib007/devops-qr-code-front-end:latest
-      - name: push image to Docker Hub
+      - name: build images
         run: |
-          docker login -u tansib007 -p ${{ secrets.DOCKER_HUB_TOKEN }}
-          docker push tansib007/devops-qr-code-front-end:latest
+          docker build ./api -t tansib007/docker push tansib007/docker-fastapi:latest
+          docker build ./front-end-nextjs -t tansib007/devops-qr-code-front-end:latest
+      - name: Login to DockerHub
+        run:  echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u tansib007 --password-stdin
+      - name: push back-end API image to Docker Hub
+        run: docker push tansib007/docker-fastapi:latest
+      - name: push front-end image to Docker Hub
+        run: docker push tansib007/devops-qr-code-front-end:latest
